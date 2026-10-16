@@ -23,7 +23,7 @@
     "backbone": "mobilenet_v3_small/imagenet"
   },
   "environment": {
-    "commit": "0c866b8",
+    "commit": "cd04240",
     "python": "3.13.15",
     "tensorflow": "2.20.0",
     "platform": "Linux-6.18.48+-x86_64-with-glibc2.39",
