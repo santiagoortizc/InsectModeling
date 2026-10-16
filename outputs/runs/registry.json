@@ -1,0 +1,25 @@
+{
+  "runs": [
+    {
+      "run_id": "20261016T192945Z_mobilenet-v3-small",
+      "name": "mobilenet-v3-small",
+      "dataset": "2026-10-15T22:12:18.887967+00:00",
+      "architecture": "mobilenet_v3_small",
+      "role": "estudiante",
+      "teacher_run_id": null,
+      "distillation": null,
+      "finetuning": 0.3,
+      "num_classes": 35,
+      "epochs_ran": 38,
+      "training_minutes": 26.2,
+      "test_accuracy": 0.919970631424376,
+      "test_macro_f1": 0.9159449102122826,
+      "validate_accuracy": 0.9294729027468448,
+      "validate_macro_f1": 0.9241796819683381,
+      "acelerador": "GPU",
+      "commit": "cd04240",
+      "notes": "Candidato a estudiante: MobileNetV3Small + cabeza comun",
+      "created_at": "2026-10-16T19:35:36.124832+00:00"
+    }
+  ]
+}
