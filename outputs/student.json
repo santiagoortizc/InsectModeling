@@ -1,0 +1,17 @@
+{
+  "run_id": "20261016T203410Z_mobilenet-v2",
+  "architecture": "mobilenet_v2",
+  "finetuning": 0.3,
+  "dataset": "2026-10-15T22:12:18.887967+00:00",
+  "formato": "tflite int8",
+  "test_accuracy": 0.933920704845815,
+  "test_macro_f1": 0.9298461320271555,
+  "test_macro_f1_f32": 0.9355344701680275,
+  "validate_macro_f1": 0.936347830347435,
+  "top3_accuracy": 0.9713656387665198,
+  "pesos_MB": 3.56,
+  "latencia_ms": 44.9,
+  "latencia_sd_ms": 1.5,
+  "motor": "xnnpack",
+  "presupuesto_MB": 8.0
+}
