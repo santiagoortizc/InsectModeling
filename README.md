@@ -1,8 +1,8 @@
 # InsectModeling
 
 Clasificación de insectos plaga agrícola del Tolima con destilación de
-conocimiento. La pregunta es si un modelo lo bastante pequeño para desplegar en
-un navegador puede acercarse a uno grande, y cuánto de esa distancia la cierra
+conocimiento. La pregunta es si un modelo lo bastante pequeño para correr en
+un dispositivo liviano, cuantizado a int8, puede acercarse a uno grande, y cuánto de esa distancia la cierra
 destilar en vez de simplemente entrenar mejor.
 
 Este repositorio entrena y evalúa; el dataset lo produce el repositorio hermano
@@ -29,11 +29,13 @@ y no de los datos.
 Tres fases, cada una en su carpeta de `notebooks/`:
 
 - **`01_student`** — cuatro candidatos a estudiante: MobileNetV3Small,
-  MobileNetV2, EfficientNetB0 y NASNetMobile. Se elige por calidad **dentro de
-  un presupuesto de descarga**, no por calidad sola.
-- **`02_teacher`** — cinco candidatos a docente: EfficientNetV2S,
-  EfficientNetV2B0, ResNet50V2, DenseNet121 e InceptionV3. Se elige por
-  macro-F1, sin mirar costo.
+  MobileNetV2, MobileNetV3Large y EfficientNetB0. Cada uno se convierte a
+  TFLite con cuantización entera completa y se elige el mejor macro-F1 **int8**
+  dentro de `PRESUPUESTO_MB` (8 MB). Cuantizar no le cuesta lo mismo a cada
+  arquitectura: las MobileNetV3 pierden mucho más que MobileNetV2.
+- **`02_teacher`** — cuatro candidatos a docente, todos claramente más grandes
+  que cualquier estudiante: EfficientNetB3, ConvNeXtTiny, ResNet50V2 y
+  DenseNet121. Se elige por macro-F1, sin mirar costo.
 - **`03_destilacion`** — cuatro variantes que transfieren del docente al
   estudiante: respuesta con y sin descongelado, features y atención.
 
@@ -51,6 +53,16 @@ por dataset para que no se mezclen cifras de dos versiones del corpus.
    `GITHUB_TOKEN` (con permiso de escritura sobre este repo).
 3. La primera celda clona este repo; al terminar, `scripts/kaggle.py` publica el
    run y los pesos (como release de GitHub).
+
+Cada comparación mira solo los runs de su rol: una arquitectura entrenada como
+docente nunca compite como estudiante.
+
+## Cuantización
+
+`scripts/cuantizacion.py` convierte un run a `model_int8.tflite`: entrada uint8
+con los píxeles crudos (el preprocess va dentro), activaciones calibradas con
+200 imágenes de train y salida en float32. Si XNNPACK no acepta el modelo se
+evalúa con los kernels de referencia y la latencia queda marcada con `motor`.
 
 ## Resultados
 

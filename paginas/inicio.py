@@ -32,14 +32,14 @@ columnas[3].metric("Mejor acierto", f"{mejor['test_accuracy']:.1%}")
 st.subheader("La pregunta", divider="green")
 izquierda, derecha = st.columns([2, 3])
 izquierda.write(
-    f"Un modelo que quepa en un teléfono o en un navegador tiene que ser pequeño, y lo "
+    f"Un modelo que corra en un dispositivo liviano tiene que ser pequeño, y lo "
     f"pequeño suele costar precisión. El proyecto mide cuánto cuesta, y si la destilación "
     f"de conocimiento —entrenar al modelo chico imitando a uno grande— cierra esa "
     f"distancia.\n\n"
     f"El mejor modelo, **{mejor['architecture']}**, acierta el "
     f"{mejor['test_accuracy']:.1%}; el que sirve este sitio, "
     f"**{sitio['architecture']}**, acierta el {sitio['test_accuracy']:.1%} pesando "
-    f"{eleccion['pesos_MB']} MB, dentro del presupuesto de "
+    f"{eleccion['pesos_MB']} MB cuantizado a int8, dentro del presupuesto de "
     f"{eleccion['presupuesto_MB']:.0f} MB. Son "
     f"{100 * (mejor['test_accuracy'] - sitio['test_accuracy']):.1f} puntos."
 )

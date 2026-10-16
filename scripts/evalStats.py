@@ -30,6 +30,11 @@ def evaluar(model, ds, classNames):
     F1 por clase y matriz de confusión."""
     probabilidades = model.predict(ds, verbose=0)
     yReal = np.concatenate([np.argmax(y.numpy(), axis=1) for _, y in ds])
+    return metricas(yReal, probabilidades, classNames)
+
+
+def metricas(yReal, probabilidades, classNames):
+    """Separada de `evaluar` para medir igual un modelo TFLite."""
     yPred = np.argmax(probabilidades, axis=1)
     ids = list(range(len(classNames)))
 

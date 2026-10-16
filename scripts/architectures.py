@@ -3,8 +3,10 @@ from tensorflow.keras import Model, layers
 
 from scripts.dataPipeline import aumentadorGeometrico
 from tensorflow.keras.applications import (
+    ConvNeXtTiny,
     DenseNet121,
     EfficientNetB0,
+    EfficientNetB3,
     EfficientNetV2B0,
     EfficientNetV2S,
     InceptionV3,
@@ -15,6 +17,7 @@ from tensorflow.keras.applications import (
     NASNetMobile,
     ResNet50V2,
 )
+from tensorflow.keras.applications.convnext import preprocess_input as convnextPreprocess
 from tensorflow.keras.applications.densenet import preprocess_input as densenetPreprocess
 from tensorflow.keras.applications.efficientnet import preprocess_input as efficientnetPreprocess
 from tensorflow.keras.applications.efficientnet_v2 import preprocess_input as efficientnetV2Preprocess
@@ -43,6 +46,8 @@ ARCHITECTURES = {
     "mobilenet": (MobileNet, mobilenetPreprocess),
     "mobilenet_v3_large": (MobileNetV3Large, mobilenetV3Preprocess),
     "efficientnet_b0": (EfficientNetB0, efficientnetPreprocess),
+    "efficientnet_b3": (EfficientNetB3, efficientnetPreprocess),
+    "convnext_tiny": (ConvNeXtTiny, convnextPreprocess),
     "nasnet_mobile": (NASNetMobile, nasnetPreprocess),
     "cnn_compacta": (None, sinPreprocess),
 }
