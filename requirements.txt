@@ -1,0 +1,14 @@
+tensorflow==2.19.1
+numpy
+pandas
+pillow
+opencv-python-headless
+ultralytics==8.4.137
+matplotlib
+scikit-learn==1.7.2
+streamlit>=1.40,<2.0
+altair
+tabulate
+ipykernel
+nbformat
+nbclient
