@@ -13,6 +13,8 @@ PUBLICABLES = ("run.json", "metrics.json", "history.json", "imgs")
 
 SUELTOS = ("outputs/student.json", "outputs/teacher.json")
 
+REGISTRO = "outputs/runs/registry.json"
+
 
 def git(*args):
     hecho = subprocess.run(["git", "-c", f"credential.helper={AYUDA_CREDENCIAL}", *args],
@@ -23,6 +25,11 @@ def git(*args):
     return hecho.stdout.strip()
 
 
+def hayPreparados():
+    """Solo lo que está en el índice: `status` cuenta también lo no versionado."""
+    return bool(git("diff", "--cached", "--name-only"))
+
+
 def publicarArchivos(mensaje, *rutas):
     """Para notebooks que no producen un run: comparaciones y figuras."""
     git("config", "user.email", "kaggle@noreply.local")
@@ -30,7 +37,7 @@ def publicarArchivos(mensaje, *rutas):
     for ruta in rutas:
         if (CLON / ruta).exists():
             git("add", str(ruta))
-    if git("status", "--porcelain"):
+    if hayPreparados():
         git("commit", "-m", mensaje)
     git("pull", "--rebase")
     if not git("log", "--oneline", "@{u}..HEAD"):
@@ -55,11 +62,15 @@ def publicarRun(runId):
         if (CLON / suelto).exists():
             git("add", suelto)
 
-    if git("status", "--porcelain"):
+    if hayPreparados():
         pesos.subir(runId, CLON / carpeta / "model.keras")
         git("commit", "-m", f"Add run {runId}")
 
-    git("checkout", "--", "outputs/runs/registry.json")
+    # el registro se regenera tras el rebase; antes del primer run no está versionado
+    if git("ls-files", REGISTRO):
+        git("checkout", "--", REGISTRO)
+    else:
+        (CLON / REGISTRO).unlink(missing_ok=True)
     sucio = git("status", "--porcelain")
     if sucio:
         raise RuntimeError(f"El árbol tiene cambios sin publicar antes del rebase:\n{sucio}")
@@ -67,8 +78,8 @@ def publicarRun(runId):
     git("pull", "--rebase")
 
     registro.registrar(runId)
-    git("add", "outputs/runs/registry.json")
-    if git("status", "--porcelain"):
+    git("add", REGISTRO)
+    if hayPreparados():
         git("commit", "-m", "Refresh run registry")
 
     if not git("log", "--oneline", "@{u}..HEAD"):
