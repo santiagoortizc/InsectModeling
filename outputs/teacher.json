@@ -1,0 +1,11 @@
+{
+  "run_id": "20261017T232037Z_convnext-tiny",
+  "architecture": "convnext_tiny",
+  "dataset": "2026-10-15T22:12:18.887967+00:00",
+  "test_accuracy": 0.9651248164464024,
+  "test_macro_f1": 0.9627378650003414,
+  "validate_macro_f1": 0.9687183207065729,
+  "latencia_ms": 2334.4,
+  "latencia_sd_ms": 27.3,
+  "parametros_M": 28.39
+}
