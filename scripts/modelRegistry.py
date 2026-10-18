@@ -61,7 +61,8 @@ def entradaDe(runId):
     config = loadRunConfig(runId)
     if not config:
         return None
-    splits = loadRunMetrics(runId).get("splits", {})
+    metricas = loadRunMetrics(runId)
+    splits, int8 = metricas.get("splits", {}), metricas.get("int8", {})
     hiper = config.get("hyperparameters", {})
     destilacion = config.get("distillation", {})
     return {
@@ -80,6 +81,8 @@ def entradaDe(runId):
         "test_macro_f1": splits.get("test", {}).get("macro_f1"),
         "validate_accuracy": splits.get("validate", {}).get("accuracy"),
         "validate_macro_f1": splits.get("validate", {}).get("macro_f1"),
+        "test_macro_f1_int8": int8.get("test", {}).get("macro_f1"),
+        "validate_macro_f1_int8": int8.get("validate", {}).get("macro_f1"),
         "acelerador": config.get("environment", {}).get("acelerador", "cpu"),
         "commit": config.get("environment", {}).get("commit"),
         "notes": config.get("notes"),

@@ -59,6 +59,15 @@ def convertirRun(runId, dirCalibracion="dataset/train"):
     return convertir(registro.modeloInferencia(runId), arquitectura, dirCalibracion, destino)
 
 
+def metricasRun(runId, split="test"):
+    """Las que guardó el notebook del run; los runs sin ellas se convierten aquí."""
+    metricas = registro.loadRunMetrics(runId)
+    guardadas = metricas.get("int8", {}).get(split)
+    if guardadas:
+        return guardadas
+    return evaluar(convertirRun(runId), f"dataset/{split}", metricas["class_names"])
+
+
 def tamanoMB(ruta):
     return Path(ruta).stat().st_size / 1e6
 

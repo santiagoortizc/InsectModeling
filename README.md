@@ -35,7 +35,12 @@ Tres fases, cada una en su carpeta de `notebooks/`:
   arquitectura: las MobileNetV3 pierden mucho más que MobileNetV2.
 - **`02_teacher`** — cuatro candidatos a docente, todos claramente más grandes
   que cualquier estudiante: EfficientNetB3, ConvNeXtTiny, ResNet50V2 y
-  DenseNet121. Se elige por macro-F1, sin mirar costo.
+  DenseNet121. Se elige el mejor macro-F1 entre los que cuestan como mucho el
+  doble por época que el más barato: el docente corre en cada paso de las
+  cuatro destilaciones.
+- **`03_destilacion`** y **`04_comparacion_final`** miden al estudiante
+  destilado también en int8: una mejora que se pierde al cuantizar no llega al
+  dispositivo.
 - **`03_destilacion`** — cuatro variantes que transfieren del docente al
   estudiante: respuesta con y sin descongelado, features y atención.
 
