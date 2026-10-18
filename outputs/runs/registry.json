@@ -1,6 +1,27 @@
 {
   "runs": [
     {
+      "run_id": "20261018T055549Z_resnet50-v2",
+      "name": "resnet50-v2",
+      "dataset": "2026-10-15T22:12:18.887967+00:00",
+      "architecture": "resnet50_v2",
+      "role": "docente",
+      "teacher_run_id": null,
+      "distillation": null,
+      "finetuning": 0.3,
+      "num_classes": 35,
+      "epochs_ran": 30,
+      "training_minutes": 92.9,
+      "test_accuracy": 0.9456681350954479,
+      "test_macro_f1": 0.9418445698970422,
+      "validate_accuracy": 0.9458054936896808,
+      "validate_macro_f1": 0.9428670997255072,
+      "acelerador": "GPU",
+      "commit": "4de0263",
+      "notes": "Candidato a docente: ResNet50V2 + cabeza comun",
+      "created_at": "2026-10-18T05:56:10.112531+00:00"
+    },
+    {
       "run_id": "20261017T232037Z_convnext-tiny",
       "name": "convnext-tiny",
       "dataset": "2026-10-15T22:12:18.887967+00:00",
