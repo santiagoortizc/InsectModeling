@@ -1,6 +1,27 @@
 {
   "runs": [
     {
+      "run_id": "20261017T232037Z_convnext-tiny",
+      "name": "convnext-tiny",
+      "dataset": "2026-10-15T22:12:18.887967+00:00",
+      "architecture": "convnext_tiny",
+      "role": "docente",
+      "teacher_run_id": null,
+      "distillation": null,
+      "finetuning": 0.3,
+      "num_classes": 35,
+      "epochs_ran": 30,
+      "training_minutes": 373.1,
+      "test_accuracy": 0.9651248164464024,
+      "test_macro_f1": 0.9627378650003414,
+      "validate_accuracy": 0.9703043801039347,
+      "validate_macro_f1": 0.9687183207065729,
+      "acelerador": "GPU",
+      "commit": "4620a60",
+      "notes": "Candidato a docente: ConvNeXtTiny + cabeza comun",
+      "created_at": "2026-10-17T23:24:32.345840+00:00"
+    },
+    {
       "run_id": "20261017T220206Z_efficientnet-b3",
       "name": "efficientnet-b3",
       "dataset": "2026-10-15T22:12:18.887967+00:00",
