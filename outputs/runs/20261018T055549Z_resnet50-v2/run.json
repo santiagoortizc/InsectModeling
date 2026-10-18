@@ -1,0 +1,35 @@
+{
+  "run_id": "20261018T055549Z_resnet50-v2",
+  "name": "resnet50-v2",
+  "dataset": "2026-10-15T22:12:18.887967+00:00",
+  "architecture": "resnet50_v2",
+  "role": "docente",
+  "notes": "Candidato a docente: ResNet50V2 + cabeza comun",
+  "num_classes": 35,
+  "hyperparameters": {
+    "img_size": [
+      448,
+      448
+    ],
+    "batch_size": 32,
+    "epochs_budget": 100,
+    "epochs_warmup": 5,
+    "epochs_ran": 30,
+    "learning_rate": 0.0001,
+    "early_stopping_patience": 8,
+    "class_weights": "balanced",
+    "seed": 42,
+    "finetuning": 0.3,
+    "backbone": "resnet50_v2/imagenet"
+  },
+  "environment": {
+    "commit": "4de0263",
+    "python": "3.13.15",
+    "tensorflow": "2.20.0",
+    "platform": "Linux-6.18.48+-x86_64-with-glibc2.39",
+    "acelerador": "GPU"
+  },
+  "started_at": "2026-10-18T05:56:10.112531+00:00",
+  "finished_at": "2026-10-18T07:29:07.002118+00:00",
+  "training_minutes": 92.9
+}
