@@ -1,0 +1,43 @@
+{
+  "run_id": "20261019T011405Z_kd-features-mobilenet-v2",
+  "name": "kd-features-mobilenet-v2",
+  "dataset": "2026-10-15T22:12:18.887967+00:00",
+  "architecture": "mobilenet_v2",
+  "role": "destilado",
+  "notes": "KD de respuesta + hint loss entre features, backbone descongelado",
+  "num_classes": 35,
+  "distillation": {
+    "tipo": "features",
+    "teacher_run_id": "20261017T220206Z_efficientnet-b3",
+    "teacher_architecture": "efficientnet_b3",
+    "temperatura": 4.0,
+    "beta_features": 850.0,
+    "finetuning": 0.3,
+    "alfa": 0.3
+  },
+  "hyperparameters": {
+    "img_size": [
+      448,
+      448
+    ],
+    "batch_size": 32,
+    "epochs_budget": 100,
+    "epochs_warmup": 5,
+    "epochs_ran": 54,
+    "learning_rate": 0.0001,
+    "early_stopping_patience": 8,
+    "class_weights": "balanced",
+    "seed": 42,
+    "backbone": "mobilenet_v2/imagenet (congelado)"
+  },
+  "environment": {
+    "commit": "0c506b6",
+    "python": "3.13.15",
+    "tensorflow": "2.20.0",
+    "platform": "Linux-6.18.48+-x86_64-with-glibc2.39",
+    "acelerador": "GPU"
+  },
+  "started_at": "2026-10-19T01:14:47.023549+00:00",
+  "finished_at": "2026-10-19T04:50:44.614673+00:00",
+  "training_minutes": 216.0
+}
