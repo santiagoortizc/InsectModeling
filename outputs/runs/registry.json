@@ -1,6 +1,29 @@
 {
   "runs": [
     {
+      "run_id": "20261019T204822Z_kd-atencion-mobilenet-v2",
+      "name": "kd-atencion-mobilenet-v2",
+      "dataset": "2026-10-15T22:12:18.887967+00:00",
+      "architecture": "mobilenet_v2",
+      "role": "destilado",
+      "teacher_run_id": "20261017T220206Z_efficientnet-b3",
+      "distillation": "atencion",
+      "finetuning": 0.3,
+      "num_classes": 35,
+      "epochs_ran": 31,
+      "training_minutes": 120.1,
+      "test_accuracy": 0.9273127753303965,
+      "test_macro_f1": 0.9217066940080352,
+      "validate_accuracy": 0.9391239792130661,
+      "validate_macro_f1": 0.9340350663155539,
+      "test_macro_f1_int8": 0.915364845226304,
+      "validate_macro_f1_int8": 0.9334364143161833,
+      "acelerador": "GPU",
+      "commit": "60b8c1c",
+      "notes": "KD de respuesta + attention transfer, backbone descongelado",
+      "created_at": "2026-10-19T20:48:45.667530+00:00"
+    },
+    {
       "run_id": "20261019T011405Z_kd-features-mobilenet-v2",
       "name": "kd-features-mobilenet-v2",
       "dataset": "2026-10-15T22:12:18.887967+00:00",
