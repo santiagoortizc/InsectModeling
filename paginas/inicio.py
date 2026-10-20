@@ -9,7 +9,12 @@ eleccion = registro.readJson(registro.OUTPUTS_DIR / "student.json")
 modelos, predeterminado = comun.catalogoModelos()
 manifiesto = comun.manifiestoCorpus()
 sitio, mejor = modelos[predeterminado], modelos[next(iter(modelos))]
-destilado = next((r for r in modelos.values() if r["role"] == "destilado"), None)
+destilado = (sitio if sitio["role"] == "destilado" else
+             next((r for r in modelos.values() if r["role"] == "destilado"), None))
+# el mismo estudiante sin docente: contra él se mide lo que aportó destilar
+control = destilado and next(
+    (r for r in modelos.values() if r["architecture"] == destilado["architecture"]
+     and r["finetuning"] == destilado["finetuning"] and not r.get("teacher_run_id")), None)
 
 st.title("🐛 Insectos plaga del Tolima")
 st.subheader(f"Reconoce {manifiesto['num_clases']} plagas agrícolas a partir de una "
@@ -43,11 +48,12 @@ izquierda.write(
     f"{eleccion['presupuesto_MB']:.0f} MB. Son "
     f"{100 * (mejor['test_accuracy'] - sitio['test_accuracy']):.1f} puntos."
 )
-if destilado:
+if destilado and control:
     izquierda.write(
         f"La versión destilada del modelo pequeño quedó en "
-        f"{destilado['test_accuracy']:.1%}, frente al {sitio['test_accuracy']:.1%} "
-        f"del mismo modelo entrenado de la forma corriente."
+        f"{destilado['test_accuracy']:.1%}, frente al {control['test_accuracy']:.1%} "
+        f"del mismo modelo entrenado de la forma corriente"
+        f"{'; es la que sirve este sitio' if destilado is sitio else ''}."
     )
 derecha.bar_chart(
     [{"modelo": f"{r['architecture']}"
