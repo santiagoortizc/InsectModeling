@@ -45,6 +45,23 @@ def manifiesto():
         return json.load(handle)
 
 
+def auditoria():
+    """Una fila por foto aceptada, con la columna `clase` ya resuelta por las
+    fusiones del manifiesto (`especie` guarda la especie real)."""
+    import pandas as pd
+
+    ruta = repoDataset() / "auditoria.csv"
+    if not ruta.exists():
+        raise FileNotFoundError(
+            f"No hay auditoria.csv en {ruta.parent}. En Kaggle, agrégalo al dataset "
+            f"junto a manifiesto.json (nueva versión del dataset).")
+    filas = pd.read_csv(ruta)
+    filas = filas[filas["veredicto"] == "aceptada"].copy()
+    fusiones = manifiesto()["parametros"].get("fusiones", {})
+    filas["clase"] = filas["especie"].map(lambda e: fusiones.get(e, e))
+    return filas
+
+
 def classNames():
     return sorted(manifiesto()["reparto"].keys())
 
