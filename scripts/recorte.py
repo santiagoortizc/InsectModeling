@@ -46,7 +46,8 @@ def hornear():
 
     detector = YOLOWorld("yolov8s-worldv2.pt")
     detector.set_classes(list(PROMPTS))
-    del detector.model.clip_model
+    if hasattr(detector.model, "clip_model"):   # las versiones nuevas ya no lo guardan
+        del detector.model.clip_model
     detector.save(str(destino))
 
     print(f"{destino} ({destino.stat().st_size / 2 ** 20:.0f} MB)")
