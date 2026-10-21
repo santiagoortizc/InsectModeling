@@ -14,3 +14,4 @@ outputs/*.pt
 yolov8s-worldv2.pt
 outputs/fichas/
 *.tflite
+weights/
