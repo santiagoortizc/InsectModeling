@@ -1,6 +1,7 @@
 """Prototipo de clasificación de insectos plaga del Tolima."""
 
 import streamlit as st
+import torchvision  # noqa: F401  antes que TensorFlow: si triton carga después, choca con su LLVM y el proceso se cae
 
 from paginas import comun
 
